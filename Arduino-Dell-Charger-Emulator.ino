@@ -22,23 +22,23 @@
 #include "OneWireHub.h"
 #include "DS2502.h"
 
-constexpr uint8_t pin_onewire   { 9 };
+#define ONE_WIRE_PIN 9
 
 /** DELL CHARGER INSPIRON (thin pin) charger **/
-constexpr uint8_t charger[41] PROGMEM = {
+static constexpr uint8_t charger[41] PROGMEM = {
   'D', 'E', 'L', 'L', '0', '0', 'A', 'C', '0', '4', '5', '1', '9', '5', '0', '2',
   '3', 'C', 'N', '0', '0', '2', '8', '5', 'K', '7', '5', '6', '6', '1', '6', 'C', 
   'H', '0', 'E', 'I', 'G', 'A', '0', '3', 0x94
 };
 
 //Setup One Wire slave hub
-auto hub       = OneWireHub(pin_onewire);
+auto hub       = OneWireHub(ONE_WIRE_PIN);
 //Create a One Wire DS2502 EPROM
 auto dellCH    = DS2502( 0x28, 0x0D, 0x01, 0x08, 0x0B, 0x02, 0x0A); // address does not matter, laptop uses skipRom -> note that therefore only one slave device is allowed on the bus
 
 void setup() {
     Serial.begin(115200);
-    Serial.println("OneWire-Hub DS2502 aka Dell Charger");
+    Serial.println("Initializing charger emulator...");
 
     // Add emulated eprom to One Wire
     hub.attach(dellCH);
