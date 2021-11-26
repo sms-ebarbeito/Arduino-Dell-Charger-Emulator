@@ -4,7 +4,7 @@
 - Tested on Arduino Pro micro
 - Maybe also work on ATTINY85 smal MCU
 
-###Sequence Diagram
+### Sequence Diagram
                     
 ```seq
 Notebook->Notebook: Charger is connected 
